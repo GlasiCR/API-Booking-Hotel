@@ -28,11 +28,11 @@ public class HotelService {
         return hotelRepository.findAll(query);
     }*/
 
-    public ResponseEntity<Hotel> findByCity(String city) {
+    /*public ResponseEntity<Hotel> findByCity(String city) {
         return hotelRepository.findByCity(city)
                 .map(hotel -> ResponseEntity.ok().body(hotel))
                 .orElse(ResponseEntity.notFound().build());
-    }
+    }*/
 
     public List<Hotel> findByNameStartingWith(String name){
         return hotelRepository.findByNameStartingWith(name);

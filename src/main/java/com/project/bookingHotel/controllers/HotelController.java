@@ -1,30 +1,42 @@
 package com.project.bookingHotel.controllers;
 
+import com.project.bookingHotel.dtos.NewBookingDto;
+import com.project.bookingHotel.dtos.RegisterBookingDto;
+import com.project.bookingHotel.model.Booking;
 import com.project.bookingHotel.model.Hotel;
+import com.project.bookingHotel.model.Room;
+import com.project.bookingHotel.services.BookingService;
 import com.project.bookingHotel.services.HotelService;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.RequestEntity;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.LocalDate;
 import java.util.List;
 
 @RestController
 @RequestMapping("/hotels")
 public class HotelController {
   @Autowired
-    private HotelService hotelService;
+  private HotelService hotelService;
+  @Autowired
+  private BookingService bookingService;
+
     @PostMapping("/")
     @ResponseStatus(HttpStatus.CREATED)
     public Hotel create(@RequestBody Hotel hotel) {
         return hotelService.create(hotel);
     }
 
-    @GetMapping("/location")
+    /*@GetMapping("/location")
     @ResponseStatus(HttpStatus.OK)
     public ResponseEntity<Hotel> findByCity(@RequestParam String city){
       return hotelService.findByCity(city);
-    }
+    }*/
 
     @GetMapping("/name")
     @ResponseStatus(HttpStatus.OK)
@@ -36,5 +48,13 @@ public class HotelController {
     @ResponseStatus(HttpStatus.OK)
     public ResponseEntity<?> findDescriptionHotelById(@PathVariable(value = "id") Long id){
       return hotelService.findDescriptionHotelById(id);
+    }
+
+    @PostMapping("/{idHotel}/booking/{idRoom}")
+    @ResponseStatus(HttpStatus.OK)
+    public Booking registerBooking(@PathVariable(value = "idHotel") Hotel hotel, @PathVariable(value = "idRoom") Room room, @RequestBody @Valid RegisterBookingDto booking){
+      Booking newBooking = new Booking(booking.checkin(), booking.checkout(), hotel, room);
+      bookingService.registerBooking(newBooking);
+      return newBooking;
     }
 }

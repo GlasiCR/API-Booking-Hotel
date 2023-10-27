@@ -1,5 +1,6 @@
 package com.project.bookingHotel.model;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.project.bookingHotel.enums.UserRole;
 import jakarta.persistence.*;
 import lombok.*;
@@ -30,9 +31,9 @@ public class User implements UserDetails {
     private String password;
     @Enumerated(EnumType.STRING)
     private UserRole role;
-
-    /* @Column
-     private List<Booking> booking;*/
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
+    @JsonManagedReference
+    private List<Booking> booking;
     @CreationTimestamp
     @Column(name="createdAt", nullable = false, updatable = false)
     private LocalDateTime createdAt;

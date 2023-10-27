@@ -1,9 +1,12 @@
 package com.project.bookingHotel.model;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.project.bookingHotel.model.Hotel;
 import jakarta.persistence.*;
 import lombok.Data;
+
+import java.util.List;
 
 @Data
 @Entity
@@ -24,6 +27,10 @@ public class Room {
     private Integer numberOfVacantRooms;
     @ManyToOne
     @JsonBackReference
-    @JoinColumn(name = "hotel_id")
+    @JoinColumn(name = "id_hotel")
     private Hotel hotel;
+
+    /*@OneToMany(mappedBy = "room", cascade = CascadeType.ALL)
+    @JsonBackReference
+    private List<Booking> booking;*/
 }

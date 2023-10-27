@@ -19,24 +19,30 @@ public class Hotel {
     private String name;
     @Column(nullable = false)
     private String descriptionHotel;
+
     @OneToMany(mappedBy = "hotel", cascade = CascadeType.ALL)
     @JsonManagedReference
     private List<Room> rooms;
+
+    /*@OneToMany(mappedBy = "hotel", cascade = CascadeType.ALL)
+    @JsonManagedReference
+    private List<Booking> booking;*/
+
     @Column(nullable = false)
     private String city;
     @Column(nullable = false)
     private Integer numberOfRooms;
     @Column(nullable = false)
-    private Integer numberOfRoomsAvaiable;
+    private Integer numberOfRoomsAvailable;
     @Column
-    private Boolean thereIsRoomAvaiable = true;
+    private Boolean numberOfRoomsAvaiable = true;
+
     @CreationTimestamp
     @Column(name="createdAt", nullable = false, updatable = false)
     private LocalDateTime createdAt;
     @UpdateTimestamp
     @Column(name="updatedAt", nullable = false)
     private LocalDateTime updatedAt;
-
 }
 
 
