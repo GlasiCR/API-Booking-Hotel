@@ -6,5 +6,5 @@ import com.project.bookingHotel.model.User;
 
 import java.time.LocalDateTime;
 
-public record RegisterBookingDto(LocalDateTime checkin, LocalDateTime checkout) {
+public record RegisterBookingDto(LocalDateTime checkin, LocalDateTime checkout, Long user) {
 }

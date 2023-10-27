@@ -25,12 +25,13 @@ public class Room {
     private Integer numberOfRooms;
     @Column(nullable = false)
     private Integer numberOfVacantRooms;
+
     @ManyToOne
     @JsonBackReference
     @JoinColumn(name = "id_hotel")
     private Hotel hotel;
 
-    /*@OneToMany(mappedBy = "room", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "room", cascade = CascadeType.ALL)
     @JsonBackReference
-    private List<Booking> booking;*/
+    private List<Booking> booking;
 }

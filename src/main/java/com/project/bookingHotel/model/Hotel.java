@@ -24,9 +24,9 @@ public class Hotel {
     @JsonManagedReference
     private List<Room> rooms;
 
-    /*@OneToMany(mappedBy = "hotel", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "hotel", cascade = CascadeType.ALL)
     @JsonManagedReference
-    private List<Booking> booking;*/
+    private List<Booking> booking;
 
     @Column(nullable = false)
     private String city;
@@ -34,8 +34,8 @@ public class Hotel {
     private Integer numberOfRooms;
     @Column(nullable = false)
     private Integer numberOfRoomsAvailable;
-    @Column
-    private Boolean numberOfRoomsAvaiable = true;
+    //@Column
+    //private Boolean numberOfRoomsAvaiable = true;
 
     @CreationTimestamp
     @Column(name="createdAt", nullable = false, updatable = false)

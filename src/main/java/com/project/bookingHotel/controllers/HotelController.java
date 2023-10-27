@@ -52,9 +52,8 @@ public class HotelController {
 
     @PostMapping("/{idHotel}/booking/{idRoom}")
     @ResponseStatus(HttpStatus.OK)
-    public Booking registerBooking(@PathVariable(value = "idHotel") Hotel hotel, @PathVariable(value = "idRoom") Room room, @RequestBody @Valid RegisterBookingDto booking){
-      Booking newBooking = new Booking(booking.checkin(), booking.checkout(), hotel, room);
-      bookingService.registerBooking(newBooking);
-      return newBooking;
+    public void registerBooking(@PathVariable(value = "idRoom") Room room, @PathVariable(value = "idHotel") Hotel hotel, @RequestBody @Valid RegisterBookingDto booking){
+      //Booking newBooking = new Booking(booking.checkin(), booking.checkout(), booking.user());
+      bookingService.registerBooking(booking, hotel, room);
     }
 }

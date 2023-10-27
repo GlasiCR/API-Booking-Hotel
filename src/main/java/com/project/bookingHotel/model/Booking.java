@@ -7,6 +7,7 @@ import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.hibernate.mapping.ToOne;
 
 import java.time.LocalDateTime;
 
@@ -25,6 +26,7 @@ public class Booking {
     @JsonBackReference
     @JoinColumn(name = "id_user")
     private User user;
+
     @ManyToOne
     @JsonBackReference
     @JoinColumn(name = "id_hotel")
@@ -36,12 +38,10 @@ public class Booking {
     private Room room;
 
 
-    public Booking(LocalDateTime checkin, LocalDateTime checkout, Hotel hotel, Room room) {
+    public Booking(LocalDateTime checkin, LocalDateTime checkout, User user) {
         this.checkin = checkin;
         this.checkout = checkout;
-        this.hotel = hotel;
-        this.room = room;
-
+        this.user = user;
 
        /* this.hotel = idHotel;
         this.room = idRoom;*/
