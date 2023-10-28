@@ -6,6 +6,7 @@ import com.project.bookingHotel.model.Hotel;
 import jakarta.persistence.*;
 import lombok.Data;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Data
@@ -18,7 +19,7 @@ public class Room {
     @Column(nullable = false)
     private String nameRoom;
     @Column(nullable = false)
-    private Double price;
+    private Integer price;
     @Column(nullable = false)
     private Integer capacity;
     @Column(nullable = false)
@@ -33,5 +34,13 @@ public class Room {
 
     @OneToMany(mappedBy = "room", cascade = CascadeType.ALL)
     @JsonBackReference
-    private List<Booking> booking;
+    private List<Booking> bookingOfRoom;
+
+    public void addBookingInRoom(Booking booking) {
+        if (bookingOfRoom == null) {
+            bookingOfRoom = new ArrayList<>();
+        }
+        bookingOfRoom.add(booking);
+        booking.setRoom(this);
+    }
 }

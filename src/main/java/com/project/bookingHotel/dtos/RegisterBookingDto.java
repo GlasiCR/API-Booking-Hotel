@@ -1,10 +1,6 @@
 package com.project.bookingHotel.dtos;
 
-import com.project.bookingHotel.model.Hotel;
-import com.project.bookingHotel.model.Room;
-import com.project.bookingHotel.model.User;
+import java.time.LocalDate;
 
-import java.time.LocalDateTime;
-
-public record RegisterBookingDto(LocalDateTime checkin, LocalDateTime checkout, Long user) {
+public record RegisterBookingDto(LocalDate checkin, LocalDate checkout, Long user, Long numberCreditCard, Integer quantityGuest) {
 }

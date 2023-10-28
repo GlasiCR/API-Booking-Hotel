@@ -6,6 +6,7 @@ import lombok.Data;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 
 @Data
@@ -26,7 +27,7 @@ public class Hotel {
 
     @OneToMany(mappedBy = "hotel", cascade = CascadeType.ALL)
     @JsonManagedReference
-    private List<Booking> booking;
+    private List<Booking> bookingOdHotel;
 
     @Column(nullable = false)
     private String city;
@@ -43,6 +44,14 @@ public class Hotel {
     @UpdateTimestamp
     @Column(name="updatedAt", nullable = false)
     private LocalDateTime updatedAt;
+
+    public void addBookingInHotel(Booking booking) {
+        if (bookingOdHotel == null) {
+            bookingOdHotel = new ArrayList<>();
+        }
+        bookingOdHotel.add(booking);
+        booking.setHotel(this);
+    }
 }
 
 

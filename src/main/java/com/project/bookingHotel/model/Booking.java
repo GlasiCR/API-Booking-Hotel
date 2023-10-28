@@ -1,15 +1,15 @@
 package com.project.bookingHotel.model;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
-import com.project.bookingHotel.enums.UserRole;
+import com.project.bookingHotel.enums.StatusBooking;
 import jakarta.persistence.*;
+import jakarta.validation.constraints.Size;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.hibernate.mapping.ToOne;
 
-import java.time.LocalDateTime;
+import java.time.LocalDate;
+import java.util.UUID;
 
 @Data
 @Entity
@@ -18,10 +18,22 @@ import java.time.LocalDateTime;
 @AllArgsConstructor
 public class Booking {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
-    private LocalDateTime checkin;
-    private LocalDateTime checkout;
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private UUID id;
+    @Column(nullable = false)
+    private LocalDate checkin;
+    @Column(nullable = false)
+    private LocalDate checkout;
+    @Column(nullable = false)
+    private Integer priceBooking;
+    @Column(nullable = false)
+    private Integer daysOfBooking;
+    @Column(nullable = false, length = 16)
+    private Long numberCreditCard;
+    @Enumerated(EnumType.STRING)
+    private StatusBooking statusBooking;
+    @Column(nullable = false)
+    private Integer quantityGuest;
     @ManyToOne
     @JsonBackReference
     @JoinColumn(name = "id_user")
@@ -38,23 +50,16 @@ public class Booking {
     private Room room;
 
 
-    public Booking(LocalDateTime checkin, LocalDateTime checkout, User user) {
+    public Booking(LocalDate checkin, LocalDate checkout, User user, Integer priceBooking, Integer daysOfBooking, Long numberCreditCard, StatusBooking statusBooking) {
         this.checkin = checkin;
         this.checkout = checkout;
         this.user = user;
+        this.priceBooking = priceBooking;
+        this.daysOfBooking =  daysOfBooking;
+        this.numberCreditCard = numberCreditCard;
+        this.statusBooking = statusBooking;
 
-       /* this.hotel = idHotel;
-        this.room = idRoom;*/
     }
-
-
-
-   /* public User(String name, String email, String password, UserRole role) {
-        this.name = name;
-        this.email = email;
-        this.password = password;
-        this.role = role;
-    }*/
 }
 
 

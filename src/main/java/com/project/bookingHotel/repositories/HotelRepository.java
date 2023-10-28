@@ -14,4 +14,5 @@ public interface HotelRepository extends JpaRepository<Hotel, Long> {
     List<Hotel> findByNameStartingWith(String name);
 
     Hotel findById(Hotel idHotel);
+
 }

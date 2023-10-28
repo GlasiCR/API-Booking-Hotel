@@ -11,6 +11,7 @@ import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
@@ -27,13 +28,13 @@ public class User implements UserDetails {
     private String name;
     @Column(nullable = false, unique = true)
     private String email;
-   @Column(nullable = false)
+    @Column(nullable = false)
     private String password;
     @Enumerated(EnumType.STRING)
     private UserRole role;
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
     @JsonManagedReference
-    private List<Booking> booking;
+    private List<Booking> bookingsOfUser;
     @CreationTimestamp
     @Column(name="createdAt", nullable = false, updatable = false)
     private LocalDateTime createdAt;
@@ -47,6 +48,14 @@ public class User implements UserDetails {
         this.email = email;
         this.password = password;
         this.role = role;
+    }
+
+    public void addBooking(Booking booking) {
+        if (bookingsOfUser == null) {
+            bookingsOfUser = new ArrayList<>();
+        }
+        bookingsOfUser.add(booking);
+        booking.setUser(this);
     }
 
     @Override
