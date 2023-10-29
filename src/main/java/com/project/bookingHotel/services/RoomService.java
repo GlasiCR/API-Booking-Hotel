@@ -28,8 +28,6 @@ public class RoomService {
             newRoom.setNameRoom(room.nameRoom());
             newRoom.setPrice(room.price());
             newRoom.setCapacity(room.capacity());
-            newRoom.setNumberOfRooms(room.numberOfRooms());
-            newRoom.setNumberOfVacantRooms(room.numberOfVacantRooms());
             newRoom.setHotel(hotel);
             roomRepository.saveAndFlush(newRoom);
 

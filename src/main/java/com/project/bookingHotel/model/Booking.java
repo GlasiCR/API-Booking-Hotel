@@ -52,6 +52,11 @@ public class Booking {
     @JoinColumn(name = "id_room")
     private Room room;
 
+    /*@ManyToOne
+    @JsonBackReference
+    @JoinColumn(name = "id_calendar")
+    private Calendar calendar;*/
+
     @CreationTimestamp
     @Column(name="createdAt", nullable = false, updatable = false)
     private LocalDateTime createdAt;
@@ -59,7 +64,7 @@ public class Booking {
     @UpdateTimestamp
     @Column(name="updatedAt", nullable = false)
     private LocalDateTime updatedAt;
-    public Booking(LocalDate checkin, LocalDate checkout, User user, Integer priceBooking, Integer daysOfBooking, Long numberCreditCard, StatusBooking statusBooking) {
+    public Booking(LocalDate checkin, LocalDate checkout, User user, Integer priceBooking, Integer daysOfBooking, Long numberCreditCard, StatusBooking statusBooking, Integer quantityGuest) {
         this.checkin = checkin;
         this.checkout = checkout;
         this.user = user;
@@ -67,6 +72,7 @@ public class Booking {
         this.daysOfBooking =  daysOfBooking;
         this.numberCreditCard = numberCreditCard;
         this.statusBooking = statusBooking;
+        this.quantityGuest = quantityGuest;
 
     }
 }

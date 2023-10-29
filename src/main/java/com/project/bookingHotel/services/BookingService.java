@@ -3,20 +3,16 @@ package com.project.bookingHotel.services;
 import com.project.bookingHotel.dtos.CancelBookingDto;
 import com.project.bookingHotel.dtos.RegisterBookingDto;
 import com.project.bookingHotel.enums.StatusBooking;
-import com.project.bookingHotel.model.Booking;
-import com.project.bookingHotel.model.Hotel;
-import com.project.bookingHotel.model.Room;
-import com.project.bookingHotel.model.User;
-import com.project.bookingHotel.repositories.BookingRepository;
-import com.project.bookingHotel.repositories.HotelRepository;
-import com.project.bookingHotel.repositories.RoomRepository;
-import com.project.bookingHotel.repositories.UserRepository;
+import com.project.bookingHotel.model.*;
+import com.project.bookingHotel.repositories.*;
 import org.apache.catalina.connector.Response;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
 import java.time.Period;
+import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 
@@ -33,7 +29,19 @@ public class BookingService {
     RoomRepository roomRepository;
     @Autowired
     BookingRepository bookingRepository;
+
     public Booking registerBooking(RegisterBookingDto booking, Long hotel, Long room){
+       /* List<Calendar> calendarAlready = calendarRepository.findByRooms(room);
+
+        if (!calendarAlready.isEmpty()) {
+            // Verifica se as datas entre check-in e check-out se sobrepõem com os calendários existentes
+            for (Calendar calendar : calendarAlready) {
+                if(booking.checkin().isBefore(calendar.getDateCheckout()) && calendar.getDateCheckin().isBefore(booking.checkout())){
+                    throw new RuntimeException("Error 404 - Não há disponibilidade para o período");
+                }
+            }
+        }*/
+
         Optional<User> userAlready = userRepository.findById(booking.user());
         if(!userAlready.isPresent()){
             throw new RuntimeException("Error 404 - Usuário não encontrado");
@@ -48,31 +56,25 @@ public class BookingService {
         if(!roomAlready.isPresent()){
             throw new RuntimeException("Error 404 - Quarto não existe");
         }
-        // 1 Período da reserva
+
         Period periodBooking = Period.between(booking.checkin(), booking.checkout());
         Integer daysBooking = periodBooking.getDays();
 
-        // 2 valor total da reserva
         Room roomBooking = roomAlready.get();
         Integer priceBooking = daysBooking * roomBooking.getPrice();
         StatusBooking statusBooking = PAGO;
 
-        // 3 Registrar reserva E Obter código de confirmação da reserva
         User userBooking = userAlready.get();
-        Booking newBooking = new Booking(booking.checkin(), booking.checkout(), userBooking, priceBooking, daysBooking, booking.numberCreditCard(), statusBooking);
+        Booking newBooking = new Booking(booking.checkin(), booking.checkout(), userBooking, priceBooking, daysBooking, booking.numberCreditCard(), statusBooking, booking.quantityGuest());
         bookingRepository.saveAndFlush(newBooking);
-
-        // 4 Incluir reserva no usuário
 
         userBooking.addBooking(newBooking);
         userRepository.save(userBooking);
 
-        // 5 Comunicar hotel sobre reserva
         Hotel hotelBooking = hotelAlready.get();
         hotelBooking.addBookingInHotel(newBooking);
         hotelRepository.save(hotelBooking);
 
-        // 6 Comunicar quarto da reserva
         roomBooking.addBookingInRoom(newBooking);
         roomRepository.save(roomBooking);
 

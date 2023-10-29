@@ -22,10 +22,6 @@ public class Room {
     private Integer price;
     @Column(nullable = false)
     private Integer capacity;
-    @Column(nullable = false)
-    private Integer numberOfRooms;
-    @Column(nullable = false)
-    private Integer numberOfVacantRooms;
 
     @ManyToOne
     @JsonBackReference
@@ -35,6 +31,10 @@ public class Room {
     @OneToMany(mappedBy = "room", cascade = CascadeType.ALL)
     @JsonBackReference
     private List<Booking> bookingOfRoom;
+
+    @OneToMany(mappedBy = "room", cascade = CascadeType.ALL)
+    @JsonBackReference
+    private List<Calendar> calendar;
 
     public void addBookingInRoom(Booking booking) {
         if (bookingOfRoom == null) {
