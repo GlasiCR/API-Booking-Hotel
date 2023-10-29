@@ -33,7 +33,7 @@ public class BookingService {
     RoomRepository roomRepository;
     @Autowired
     BookingRepository bookingRepository;
-    public UUID registerBooking(RegisterBookingDto booking, Long hotel, Long room){
+    public Booking registerBooking(RegisterBookingDto booking, Long hotel, Long room){
         Optional<User> userAlready = userRepository.findById(booking.user());
         if(!userAlready.isPresent()){
             throw new RuntimeException("Error 404 - Usuário não encontrado");
@@ -59,7 +59,7 @@ public class BookingService {
 
         // 3 Registrar reserva E Obter código de confirmação da reserva
         User userBooking = userAlready.get();
-        Booking newBooking = new Booking(booking.checkin(), booking.checkout(), priceBooking, daysBooking, booking.numberCreditCard(), statusBooking);
+        Booking newBooking = new Booking(booking.checkin(), booking.checkout(), userBooking, priceBooking, daysBooking, booking.numberCreditCard(), statusBooking);
         bookingRepository.saveAndFlush(newBooking);
 
         // 4 Incluir reserva no usuário
@@ -76,7 +76,7 @@ public class BookingService {
         roomBooking.addBookingInRoom(newBooking);
         roomRepository.save(roomBooking);
 
-        return newBooking.getId();
+        return newBooking;
     }
 
     public ResponseEntity cancelBooking(UUID numberBooking, CancelBookingDto cancelBooking){

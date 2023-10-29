@@ -21,7 +21,7 @@ public class RoomService {
 
 
     public ResponseEntity<Room> createRoom(RoomCreateDto room){
-        Optional<Hotel> hotelAlready = hotelRepository.findById(room.idHotel());
+        Optional<Hotel> hotelAlready = hotelRepository.findById(room.hotel());
         if(hotelAlready.isPresent()){
             Hotel hotel = hotelAlready.get();
             Room newRoom = new Room();
@@ -31,10 +31,10 @@ public class RoomService {
             newRoom.setNumberOfRooms(room.numberOfRooms());
             newRoom.setNumberOfVacantRooms(room.numberOfVacantRooms());
             newRoom.setHotel(hotel);
-            roomRepository.save(newRoom);
+            roomRepository.saveAndFlush(newRoom);
 
             hotel.getRooms().add(newRoom);
-            hotelRepository.saveAndFlush(hotel);
+            hotelRepository.save(hotel);
 
             return ResponseEntity.ok().body(newRoom);
         }

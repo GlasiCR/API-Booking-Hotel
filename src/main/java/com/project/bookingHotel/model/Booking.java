@@ -59,10 +59,10 @@ public class Booking {
     @UpdateTimestamp
     @Column(name="updatedAt", nullable = false)
     private LocalDateTime updatedAt;
-    public Booking(LocalDate checkin, LocalDate checkout, Integer priceBooking, Integer daysOfBooking, Long numberCreditCard, StatusBooking statusBooking) {
+    public Booking(LocalDate checkin, LocalDate checkout, User user, Integer priceBooking, Integer daysOfBooking, Long numberCreditCard, StatusBooking statusBooking) {
         this.checkin = checkin;
         this.checkout = checkout;
-        //this.user = user;
+        this.user = user;
         this.priceBooking = priceBooking;
         this.daysOfBooking =  daysOfBooking;
         this.numberCreditCard = numberCreditCard;

@@ -1,6 +1,7 @@
 package com.project.bookingHotel.controllers;
 
 import com.project.bookingHotel.dtos.RegisterBookingDto;
+import com.project.bookingHotel.model.Booking;
 import com.project.bookingHotel.model.Hotel;
 import com.project.bookingHotel.services.BookingService;
 import com.project.bookingHotel.services.HotelService;
@@ -47,7 +48,7 @@ public class HotelController {
 
     @PostMapping("/{idHotel}/booking/{idRoom}")
     @ResponseStatus(HttpStatus.OK)
-    public UUID registerBooking(@PathVariable(value = "idRoom") Long room, @PathVariable(value = "idHotel") Long hotel, @RequestBody @Valid RegisterBookingDto booking){
+    public Booking registerBooking(@PathVariable(value = "idRoom") Long room, @PathVariable(value = "idHotel") Long hotel, @RequestBody @Valid RegisterBookingDto booking){
       return bookingService.registerBooking(booking, hotel, room);
     }
 }
