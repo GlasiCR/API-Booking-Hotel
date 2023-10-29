@@ -9,8 +9,8 @@ import java.util.Optional;
 
 @Repository
 public interface HotelRepository extends JpaRepository<Hotel, Long> {
-    /*@Query("SELECT c FROM Hotel c WHERE c.city = :city AND c.numberOfRoomsAvaiable > 0")
-    Optional<Hotel> findByCity(String city);*/
+    @Query("SELECT c FROM Hotel c WHERE c.city = :city AND c.numberOfRoomsAvailable > 0")
+    Optional<List<Hotel>> findByCity(String city);
     List<Hotel> findByNameStartingWith(String name);
 
     Hotel findById(Hotel idHotel);

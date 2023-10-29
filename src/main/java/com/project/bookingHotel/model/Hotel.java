@@ -35,8 +35,8 @@ public class Hotel {
     private Integer numberOfRooms;
     @Column(nullable = false)
     private Integer numberOfRoomsAvailable;
-    //@Column
-    //private Boolean numberOfRoomsAvaiable = true;
+    @Column
+    private Boolean thereIsRoomsAvailable = true;
 
     @CreationTimestamp
     @Column(name="createdAt", nullable = false, updatable = false)

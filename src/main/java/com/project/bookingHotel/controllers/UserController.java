@@ -1,6 +1,7 @@
 package com.project.bookingHotel.controllers;
 
 import com.project.bookingHotel.dtos.UserCreateDto;
+import com.project.bookingHotel.model.Booking;
 import com.project.bookingHotel.model.User;
 import com.project.bookingHotel.services.UserService;
 import jakarta.validation.Valid;
@@ -34,6 +35,12 @@ public class UserController {
     @ResponseStatus(HttpStatus.OK)
     public ResponseEntity<User> findUserById(@PathVariable(value = "id") Long id){
         return userService.findUserById(id);
+    }
+
+    @GetMapping("/{id}/view_bookings")
+    @ResponseStatus(HttpStatus.OK)
+    public ResponseEntity<List<Booking>> findBookingByUser(@PathVariable(value = "id") Long id){
+        return userService.findBookingByIdUser(id);
     }
 
     @PutMapping("/{id}")

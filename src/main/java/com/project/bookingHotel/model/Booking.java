@@ -7,8 +7,11 @@ import jakarta.validation.constraints.Size;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.UpdateTimestamp;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.UUID;
 
 @Data
@@ -49,11 +52,17 @@ public class Booking {
     @JoinColumn(name = "id_room")
     private Room room;
 
+    @CreationTimestamp
+    @Column(name="createdAt", nullable = false, updatable = false)
+    private LocalDateTime createdAt;
 
-    public Booking(LocalDate checkin, LocalDate checkout, User user, Integer priceBooking, Integer daysOfBooking, Long numberCreditCard, StatusBooking statusBooking) {
+    @UpdateTimestamp
+    @Column(name="updatedAt", nullable = false)
+    private LocalDateTime updatedAt;
+    public Booking(LocalDate checkin, LocalDate checkout, Integer priceBooking, Integer daysOfBooking, Long numberCreditCard, StatusBooking statusBooking) {
         this.checkin = checkin;
         this.checkout = checkout;
-        this.user = user;
+        //this.user = user;
         this.priceBooking = priceBooking;
         this.daysOfBooking =  daysOfBooking;
         this.numberCreditCard = numberCreditCard;

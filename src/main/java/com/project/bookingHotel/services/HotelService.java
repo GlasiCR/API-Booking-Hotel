@@ -1,15 +1,13 @@
 package com.project.bookingHotel.services;
 
 import com.project.bookingHotel.model.Hotel;
+import com.project.bookingHotel.model.Room;
 import com.project.bookingHotel.repositories.HotelRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Optional;
+import java.util.*;
 
 @Service
 public class HotelService {
@@ -28,24 +26,36 @@ public class HotelService {
         return hotelRepository.findAll(query);
     }*/
 
-    /*public ResponseEntity<Hotel> findByCity(String city) {
+    public ResponseEntity<List<Hotel>> findByCity(String city) {
         return hotelRepository.findByCity(city)
                 .map(hotel -> ResponseEntity.ok().body(hotel))
                 .orElse(ResponseEntity.notFound().build());
-    }*/
+    }
 
     public List<Hotel> findByNameStartingWith(String name){
         return hotelRepository.findByNameStartingWith(name);
     }
 
-    public ResponseEntity<?> findDescriptionHotelById(Long id) {
-        Optional<Hotel> optionalHotel = hotelRepository.findById(id);
+    public ResponseEntity<?> findDetailsAboutHotelById(Long id) {
+        Optional<Hotel> hotelAlready = hotelRepository.findById(id);
 
-        if (optionalHotel.isPresent()) {
-            Hotel hotel = optionalHotel.get();
-            Map<String, String> detailsHotel = new HashMap<>();
+        if (hotelAlready.isPresent()) {
+            Hotel hotel = hotelAlready.get();
+            List<Room> roomsOfHotel = hotel.getRooms();
+
+            List<Map<String, Object>> roomsInfo = new ArrayList<>();
+            for (Room room : roomsOfHotel) {
+                Map<String, Object> roomDetails = new HashMap<>();
+                roomDetails.put("nameRoom", room.getNameRoom());
+                roomDetails.put("price", room.getPrice());
+                roomsInfo.add(roomDetails);
+            }
+
+            Map<String, Object> detailsHotel = new HashMap<>();
             detailsHotel.put("name", hotel.getName());
             detailsHotel.put("description", hotel.getDescriptionHotel());
+            detailsHotel.put("rooms", roomsInfo);
+
             return ResponseEntity.ok().body(detailsHotel);
         } else {
             return ResponseEntity.notFound().build();

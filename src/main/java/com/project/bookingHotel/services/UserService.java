@@ -1,6 +1,7 @@
 package com.project.bookingHotel.services;
 
 import com.project.bookingHotel.dtos.UserCreateDto;
+import com.project.bookingHotel.model.Booking;
 import com.project.bookingHotel.model.User;
 import com.project.bookingHotel.repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,6 +10,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class UserService {
@@ -34,6 +36,16 @@ public class UserService {
         return userRepository.findById(id)
                 .map(user -> ResponseEntity.ok().body(user))
                 .orElse(ResponseEntity.notFound().build());
+    }
+
+    public ResponseEntity<List<Booking>> findBookingByIdUser(Long id){
+        Optional <User> userAlready = userRepository.findById(id);
+        if(userAlready.isPresent()){
+            User usersBooking = userAlready.get();
+            return ResponseEntity.ok().body(usersBooking.getBookingsOfUser());
+        }else{
+            return ResponseEntity.notFound().build();
+        }
     }
 
     public ResponseEntity<User> updateUserById(Long id, User user){
