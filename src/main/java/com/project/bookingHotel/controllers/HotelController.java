@@ -48,7 +48,7 @@ public class HotelController {
 
     @PostMapping("/{idHotel}/booking/{idRoom}")
     @ResponseStatus(HttpStatus.OK)
-    public Booking registerBooking(@PathVariable(value = "idRoom") Long room, @PathVariable(value = "idHotel") Long hotel, @RequestBody @Valid RegisterBookingDto booking){
-      return bookingService.registerBooking(booking, hotel, room);
+    public ResponseEntity<Booking> registerBooking(@PathVariable(value = "idRoom") Long room, @PathVariable(value = "idHotel") Long hotel, @RequestBody @Valid RegisterBookingDto booking){
+      return bookingService.registerBooking(booking, hotel, room) ;
     }
 }

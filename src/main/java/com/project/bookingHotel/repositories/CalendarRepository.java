@@ -9,5 +9,6 @@ import java.util.List;
 
 @Repository
 public interface CalendarRepository extends JpaRepository<Calendar, Long> {
-    public List<Room> findByRoom(Room room);
+    //public List<Room> findByRoom(Long room);
+    List<Calendar> findByRoom(Room room);
 }

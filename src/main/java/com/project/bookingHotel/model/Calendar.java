@@ -7,6 +7,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.time.LocalDate;
+import java.util.UUID;
 
 @Data
 @AllArgsConstructor
@@ -17,9 +18,14 @@ public class Calendar {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+    @Column(nullable = false)
     private LocalDate dateCheckin;
+    @Column(nullable = false)
     private LocalDate dateCheckout;
+    @Column(nullable = false)
     private Integer periodBooking;
+    @Column(nullable = false)
+    private UUID numberBooking;
 
     /*@OneToMany(mappedBy = "calendar", cascade = CascadeType.ALL)
     @JsonManagedReference
@@ -30,4 +36,11 @@ public class Calendar {
     @JoinColumn(name = "id_room")
     private Room room;
 
+    public Calendar(LocalDate checkin, LocalDate checkout, Integer daysBooking, UUID id, Room roomBooking) {
+        this.dateCheckin = checkin;
+        this.dateCheckout = checkout;
+        this.periodBooking = daysBooking;
+        this.numberBooking = id;
+        this.room = roomBooking;
+    }
 }
