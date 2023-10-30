@@ -12,5 +12,5 @@ import java.util.Optional;
 public interface RoomRepository extends JpaRepository <Room, Long>{
     List<Room> findByHotelId(Long hotelId);
     Optional<Room> findById(Room room);
-    //Room findByCalendar(Room room);
+    List<Calendar> findByCalendar(Room room);
 }

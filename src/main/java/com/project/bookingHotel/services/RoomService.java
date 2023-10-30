@@ -47,7 +47,9 @@ public class RoomService {
     }
 
    public void getRoomOccupancy(Long room){
-        //Room datesRoomOccupancy = roomRepository.findByCalendar(room);
-        System.out.println(room);
+        Optional<Room> roomAlready = roomRepository.findById(room);
+        Room roomRequest = roomAlready.get();
+        List<Calendar> datesRoomOccupancy = roomRepository.findByCalendar(roomRequest);
+        System.out.println(datesRoomOccupancy);
     }
 }
