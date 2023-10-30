@@ -1,6 +1,7 @@
 package com.project.bookingHotel.model;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.project.bookingHotel.enums.StatusBooking;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Size;
@@ -76,5 +77,3 @@ public class Booking {
 
     }
 }
-
-

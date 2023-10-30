@@ -1,8 +1,10 @@
 package com.project.bookingHotel.services;
 
 import com.project.bookingHotel.dtos.RoomCreateDto;
+import com.project.bookingHotel.model.Calendar;
 import com.project.bookingHotel.model.Hotel;
 import com.project.bookingHotel.model.Room;
+import com.project.bookingHotel.repositories.CalendarRepository;
 import com.project.bookingHotel.repositories.HotelRepository;
 import com.project.bookingHotel.repositories.RoomRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,7 +20,8 @@ public class RoomService {
     private RoomRepository roomRepository;
     @Autowired
     private HotelRepository hotelRepository;
-
+    @Autowired
+    private CalendarRepository calendarRepository;
 
     public ResponseEntity<Room> createRoom(RoomCreateDto room){
         Optional<Hotel> hotelAlready = hotelRepository.findById(room.hotel());
@@ -41,5 +44,10 @@ public class RoomService {
 
     public List<Room> getRoomsByHotelId(Long hotelId) {
         return roomRepository.findByHotelId(hotelId);
+    }
+
+   public void getRoomOccupancy(Long room){
+        //Room datesRoomOccupancy = roomRepository.findByCalendar(room);
+        System.out.println(room);
     }
 }

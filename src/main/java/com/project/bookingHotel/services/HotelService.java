@@ -1,8 +1,10 @@
 package com.project.bookingHotel.services;
 
+import com.project.bookingHotel.dtos.RoomCreateDto;
 import com.project.bookingHotel.model.Hotel;
 import com.project.bookingHotel.model.Room;
 import com.project.bookingHotel.repositories.HotelRepository;
+import com.project.bookingHotel.repositories.RoomRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
@@ -63,12 +65,3 @@ public class HotelService {
     }
 
 }
-
-
-    /*
-
-    mostrar hoteis de acordo com o filtro
-    quando clicar no hotel deve permitir visualizar informações como: descrição, comodidades e preços dos quartos
-
-     */
-

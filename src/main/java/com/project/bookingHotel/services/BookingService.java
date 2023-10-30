@@ -109,9 +109,9 @@ public class BookingService {
         if(booking.getUser() == user){
             Period periodBetweenCheckinAndCurrentDate = Period.between(cancelBooking.todayDate(), booking.getCheckin());
             Integer differenceInDays =  periodBetweenCheckinAndCurrentDate.getDays();
-                    if(differenceInDays <= 7){
-                        return ResponseEntity.badRequest().body("Não foi possível cancelar a resrva, pois não está no prazo permitido para solicitação");
-                    }
+            if(differenceInDays <= 7){
+                return ResponseEntity.badRequest().body("Não foi possível cancelar a resrva, pois não está no prazo permitido para solicitação");
+            }
         }
         booking.setStatusBooking(StatusBooking.CANCELADO);
         bookingRepository.save(booking);

@@ -51,4 +51,6 @@ public class HotelController {
     public ResponseEntity<Booking> registerBooking(@PathVariable(value = "idRoom") Long room, @PathVariable(value = "idHotel") Long hotel, @RequestBody @Valid RegisterBookingDto booking){
       return bookingService.registerBooking(booking, hotel, room) ;
     }
+
+
 }

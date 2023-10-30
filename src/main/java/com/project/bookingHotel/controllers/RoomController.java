@@ -5,6 +5,7 @@ import com.project.bookingHotel.model.Room;
 import com.project.bookingHotel.services.RoomService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -24,5 +25,11 @@ public class RoomController {
     @GetMapping("/{hotelId}")
     public List<Room> getRoomsByHotelId(@PathVariable Long hotelId) {
         return roomService.getRoomsByHotelId(hotelId);
+    }
+
+    @GetMapping("/filterDate/{idRoom}")
+    @ResponseStatus(HttpStatus.OK)
+    public void getRoomOccupancy(@PathVariable(value = "idRoom") Long room){
+        roomService.getRoomOccupancy(room);
     }
 }
