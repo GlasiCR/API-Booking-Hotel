@@ -33,7 +33,7 @@ public class Room {
     private List<Booking> bookingOfRoom;
 
     @OneToMany(mappedBy = "room", cascade = CascadeType.ALL)
-    @JsonBackReference
+    @JsonManagedReference
     private List<Calendar> calendar;
 
     /*@OneToMany
