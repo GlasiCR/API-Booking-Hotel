@@ -3,7 +3,9 @@ package com.project.bookingHotel.model;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 import java.time.LocalDateTime;
@@ -13,6 +15,8 @@ import java.util.List;
 @Data
 @Entity
 @Table(name="hotels")
+@AllArgsConstructor
+@NoArgsConstructor
 public class Hotel {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -45,6 +49,15 @@ public class Hotel {
     @UpdateTimestamp
     @Column(name="updatedAt", nullable = false)
     private LocalDateTime updatedAt;
+
+    public Hotel(String name, String s, String city, Integer integer, Integer integer1) {
+        this.name = name;
+        this.descriptionHotel = s;
+        this.city = city;
+        this.numberOfRooms = integer;
+        this.numberOfRoomsAvailable = integer1;
+
+    }
 
     public void addBookingInHotel(Booking booking) {
         if (bookingOdHotel == null) {

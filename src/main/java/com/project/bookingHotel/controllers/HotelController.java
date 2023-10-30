@@ -1,5 +1,6 @@
 package com.project.bookingHotel.controllers;
 
+import com.project.bookingHotel.dtos.CreateHotelDto;
 import com.project.bookingHotel.dtos.RegisterBookingDto;
 import com.project.bookingHotel.model.Booking;
 import com.project.bookingHotel.model.Hotel;
@@ -24,7 +25,7 @@ public class HotelController {
 
     @PostMapping("/")
     @ResponseStatus(HttpStatus.CREATED)
-    public Hotel create(@RequestBody Hotel hotel) {
+    public Hotel create(@RequestBody CreateHotelDto hotel) {
         return hotelService.create(hotel);
     }
 

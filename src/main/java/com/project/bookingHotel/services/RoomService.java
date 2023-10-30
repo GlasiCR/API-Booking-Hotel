@@ -50,6 +50,7 @@ public class RoomService {
         Optional<Room> roomAlready = roomRepository.findById(room);
         Room roomRequest = roomAlready.get();
         List<Calendar> datesRoomOccupancy = roomRepository.findByCalendar(roomRequest);
+        System.out.println(roomAlready);
         System.out.println(datesRoomOccupancy);
     }
 }

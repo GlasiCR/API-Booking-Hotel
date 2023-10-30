@@ -36,6 +36,11 @@ public class Room {
     @JsonBackReference
     private List<Calendar> calendar;
 
+    /*@OneToMany
+    @JsonBackReference
+    @JoinColumn(name = "id_calendar")
+    private List<Calendar> calendar;*/
+
     public void addBookingInRoom(Booking booking) {
         if (bookingOfRoom == null) {
             bookingOfRoom = new ArrayList<>();

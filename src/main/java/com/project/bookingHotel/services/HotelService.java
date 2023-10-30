@@ -1,5 +1,6 @@
 package com.project.bookingHotel.services;
 
+import com.project.bookingHotel.dtos.CreateHotelDto;
 import com.project.bookingHotel.dtos.RoomCreateDto;
 import com.project.bookingHotel.model.Hotel;
 import com.project.bookingHotel.model.Room;
@@ -16,8 +17,9 @@ public class HotelService {
     @Autowired
     private HotelRepository hotelRepository;
 
-    public Hotel create(Hotel hotel){
-        return hotelRepository.save(hotel);
+    public Hotel create(CreateHotelDto hotel){
+        Hotel newHotel = new Hotel(hotel.name(), hotel.descriptionHotel(), hotel.city(), hotel.numberOfRooms(), hotel.numberOfRoomsAvaiable());
+        return hotelRepository.save(newHotel);
     }
 
     public List<Hotel> getAllHotels(){
