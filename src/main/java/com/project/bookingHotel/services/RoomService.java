@@ -46,11 +46,12 @@ public class RoomService {
         return roomRepository.findByHotelId(hotelId);
     }
 
-   public void getRoomOccupancy(Long room){
+   public List<Calendar> getRoomOccupancy(Long room){
         Optional<Room> roomAlready = roomRepository.findById(room);
         Room roomRequest = roomAlready.get();
-        List<Calendar> datesRoomOccupancy = roomRepository.findByCalendar(roomRequest);
-        System.out.println(roomAlready);
-        System.out.println(datesRoomOccupancy);
+        //List<Calendar> datesRoomOccupancy = roomRepository.findByCalendar(roomRequest);
+        List<Calendar> datesRoomOccupancy = calendarRepository.findByRoom(roomRequest);
+        //System.out.println(datesRoomOccupancy);
+       return datesRoomOccupancy;
     }
 }

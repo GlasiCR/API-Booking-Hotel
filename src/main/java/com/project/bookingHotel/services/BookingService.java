@@ -10,7 +10,9 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 
+import java.time.LocalDate;
 import java.time.Period;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
@@ -89,7 +91,19 @@ public class BookingService {
         roomRepository.save(roomBooking);
 
         //Registro ocupação de datas em calendário
-        Calendar newCalendar = new Calendar(booking.checkin(), booking.checkout(), daysBooking, newBooking.getId(), roomBooking);
+        Calendar newCalendar = new Calendar(booking.checkin(), booking.checkout(), daysBooking, newBooking.getId(), roomBooking, hotelBooking);
+        calendarRepository.save(newCalendar);
+
+
+        //Registrar todos os dias de ocupação
+        List<LocalDate> datesOcupaccy = new ArrayList<>();
+        LocalDate startDate = booking.checkin();
+        LocalDate endDate = booking.checkout().plusDays(1);
+        while (!startDate.isEqual(endDate)) {
+            datesOcupaccy.add(startDate);
+            startDate = startDate.plusDays(1);
+        }
+        newCalendar.setDatesOcupaccy(datesOcupaccy);
         calendarRepository.save(newCalendar);
 
         return ResponseEntity.ok().body(newBooking);

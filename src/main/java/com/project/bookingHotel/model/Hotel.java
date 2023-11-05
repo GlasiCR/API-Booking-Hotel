@@ -34,6 +34,10 @@ public class Hotel {
     @JsonManagedReference
     private List<Booking> bookingOdHotel;
 
+    @OneToMany(mappedBy = "hotel", cascade = CascadeType.ALL)
+    @JsonManagedReference
+    private List<Calendar> calendar;
+
     @Column(nullable = false)
     private String city;
     @Column(nullable = false)
