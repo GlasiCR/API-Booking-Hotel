@@ -1,5 +1,6 @@
 package com.project.bookingHotel.controllers;
 
+import com.project.bookingHotel.dtos.UpdateUserDto;
 import com.project.bookingHotel.dtos.UserCreateDto;
 import com.project.bookingHotel.model.Booking;
 import com.project.bookingHotel.model.User;
@@ -45,7 +46,7 @@ public class UserController {
 
     @PutMapping("/{id}")
     @ResponseStatus(HttpStatus.OK)
-    public ResponseEntity<User> updateUserById(@PathVariable(value = "id") Long id, @RequestBody User user){
+    public ResponseEntity<User> updateUserById(@PathVariable(value = "id") Long id, @RequestBody UpdateUserDto user){
         return userService.updateUserById(id, user);
     }
     @DeleteMapping("/{id}")

@@ -1,5 +1,6 @@
 package com.project.bookingHotel.services;
 
+import com.project.bookingHotel.dtos.UpdateUserDto;
 import com.project.bookingHotel.dtos.UserCreateDto;
 import com.project.bookingHotel.model.Booking;
 import com.project.bookingHotel.model.User;
@@ -25,7 +26,7 @@ public class UserService {
         User newUser = new User(user.name(), user.email(), passwordEncrypt, user.role());
         userRepository.save(newUser);
 
-        return ResponseEntity.ok().body("Usuário cadastrado com sucesso");
+        return ResponseEntity.ok().body(newUser);
     }
 
     public List<User> getAllUsers(){
@@ -48,15 +49,18 @@ public class UserService {
         }
     }
 
-    public ResponseEntity<User> updateUserById(Long id, User user){
-        return userRepository.findById(id)
-                .map(userUpdate -> {
-                    userUpdate.setName((user.getName()));
-                    userUpdate.setEmail(user.getEmail());
-                    userUpdate.setPassword((userUpdate.getPassword()));
-                    User updateUser = userRepository.save(user);
-                    return ResponseEntity.ok().body(updateUser);
-        }).orElse(ResponseEntity.notFound().build());
+    public ResponseEntity<User> updateUserById(Long id, UpdateUserDto user){
+        Optional<User> newUser = userRepository.findById(id);
+        if(newUser.isPresent()){
+            User userToUpdate = newUser.get();
+            userToUpdate.setName(user.name());
+            userToUpdate.setEmail(user.email());
+            userToUpdate.setPassword(user.password());
+            userRepository.save(userToUpdate);
+            return ResponseEntity.ok(userToUpdate);
+        } else {
+            return ResponseEntity.notFound().build();
+        }
     }
 
     public ResponseEntity<Object> deleteUserById(Long id){

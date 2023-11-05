@@ -26,9 +26,9 @@ public class CalendarService {
 
     public List<Room> filterByAvailableCalendar(LocalDate checkin, LocalDate checkout, ResearchAvailableCalendarDto researchAvailableCalendar) {
         Optional<Hotel> hotelAlready = hotelRepository.findById(researchAvailableCalendar.idHotel());
-        //if (!hotelAlready.isPresent()) {
-          //  System.out.println("Hotel not exists");
-        //}
+        if (!hotelAlready.isPresent()) {
+            System.out.println("Hotel not exists");
+        }
         if (hotelAlready.isPresent()) {
             Hotel hotel = hotelAlready.get();
             List<Room> roomsAvailable = new ArrayList<>();
@@ -37,8 +37,7 @@ public class CalendarService {
 
                 for (Calendar calendar : room.getCalendar()) {
                     List<LocalDate> datesOcupaccy = calendar.getDatesOcupaccy();
-                    if (datesOcupaccy != null && datesOcupaccy.contains(checkout) ) {
-                    //if (!calendar.getDatesOcupaccy().contains(calendar)) {
+                    if (datesOcupaccy != null && datesOcupaccy.contains(checkin)|| datesOcupaccy != null && datesOcupaccy.contains(checkout)) {
                         dateAvailable = false;
                     }
                 }

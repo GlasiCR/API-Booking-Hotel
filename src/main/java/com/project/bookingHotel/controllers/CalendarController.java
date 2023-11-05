@@ -19,7 +19,6 @@ public class CalendarController {
 
   @GetMapping("")
     public List<Room> filterByAvailableCalendar(@RequestParam LocalDate checkin, @RequestParam LocalDate checkout, @RequestBody ResearchAvailableCalendarDto ResearchAvailableCalendar){
-        System.out.print("este é o chekin " + checkin + ", e este é o chekout  " + checkout);
         return calendarService.filterByAvailableCalendar(checkin, checkout, ResearchAvailableCalendar);
   }
 }
