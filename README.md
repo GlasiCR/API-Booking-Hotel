@@ -37,7 +37,7 @@ No arquivo application.properties, configure banco de dados.
 ### Rotas:
 {{ URL }}: http://localhost:8081/
 
-🔒 : Rotas que requerem autenticação
+🔒 : Rotas que requerem autenticação <br>
 🔐 : Rotas que requerem autenticação de usuário Admin
 
 ##### Rotas de usuário
