@@ -37,13 +37,14 @@ No arquivo application.properties, configure banco de dados.
 ### Rotas:
 {{ URL }}: http://localhost:8081/
 
-🔐: Rotas que requerem autenticação
+🔒 : Rotas que requerem autenticação
+🔐 : Rotas que requerem autenticação de usuário Admin
 
 ##### Rotas de usuário
 | Método | Rota                        | Descrição                            | Exemplo Requisição Body                    |
 |--------|-----------------------------|-------------------------------------|------------------------------------------|
 | POST   | `{{URL}}/users/create`            | Criar usuário                        | `json\n{ "name": string, "email" : string, "password": string }` |
-| PUT   | 🔐 `{{URL}}/users/{id}`  | Atualização de dados do usuário     |                |
+| PUT   | 🔒 `{{URL}}/users/{id}`  | Atualização de dados do usuário     |                |
 | GET   | 🔐 `{{URL}}/users/{id}` | Pesquisa de usuário pelo Id         | `json\n{ "idUser": string, "idJob" : string }` |
 | GET    | 🔐 `{{URL}}/users/{id}/view_bookings` | Pesquisa reservas do usuário |  |
 | DELETE   | 🔐 `{{URL}}/users/{id}` | Exclui usuário do banco de dados         |  |
@@ -56,22 +57,7 @@ No arquivo application.properties, configure banco de dados.
 ##### Rotas de hoteis
 | Método | Rota                               | Descrição                                                  | Exemplo Requisição Body                                                             |
 |--------|------------------------------------|-----------------------------------------------------------|-------------------------------------------------------------------------------------|
-| POST   | 🔐 `{{URL}}/hotels/`                    | Criar hotel         | `json\n{ "name": string, "description" : string, "city": string }` |
-| GET    | 🔐 `{{URL}}/jobs/?`                   | Filtro de vagas de acordo com a especificação da query    | `json\n{ "idUser": "idUser" }`                                                     |
-| GET    | 🔐 `{{URL}}/jobs/all/?page=1&itensPage=2` | Retorna a lista de vagas de forma paginada. Usar `page` para informar a página necessária e `itensPage` para informar o limite de quantas vagas deseja por página | |
-| GET    | 🔐 `{{URL}}/jobs/all/`                | Retorna a lista de vagas com suas respectivas informações |                                                                                     |
-
-##### Rotas para usuário não logado
-| Método | Rota                        | Descrição                                                  |
-|--------|-----------------------------|-----------------------------------------------------------|
-| GET    | `{{URL}}/allJobs/`          | Retorna a lista de vagas, porém com apenas algumas informações |
-| GET    | `{{URL}}/?`                 | Filtro de vagas de acordo com a especificação da query    |
-
-##### Rotas para obter informações sobre tecnologias mais pesquisadas e as cidades que mais procuraram por estas cidades
-| Método | Rota                            | Descrição                                                      |
-|--------|---------------------------------|---------------------------------------------------------------|
-| GET    | 🔐 `{{URL}}/tendencies/`           | Retorna as tecnologias mais pesquisadas                        |
-| GET    | 🔐 `{{URL}}/tendencies/NomeTecnologia` | Retorna as cidades que mais pesquisaram a tecnologia informada no endpoint por parâmetro |
+| POST   | 🔐 `{{URL}}/hotels/`                    | Criar hotel         | `json\n{ "name": string, "description" : string, "city": string                                                           
 
 ### Contribuições:
 Ficarei muito feliz caso queira contribuir com o projeto e desde já agradeço =) Clone este repositório, crie seu branch de trabalho e bora lá!
