@@ -14,16 +14,27 @@ API para a gestão de reserva de hoteis,
 
 ### Funcionalidades:
 •	Cadastro de usuário;
+
 •	Atualização dos dados do usuário;
+
 •	Vizualização de reservas;
+
 •	Exclusão de usuário;
+
 •	Login com validação de senha e token (JWT);
+
 •	Cria hotel;
+
 •	Busca de hotel por nome e localidade;
+
 •	Pesquisa disponibilidade de reserva de acordo com a data do checkin e chekout desejados;
+
 •	Registro de reserva;
+
 •	Cancelamento de reserva (não se trata de um DELETE de fato, mas sim uma atualização para o status "CANCELADO";
+
 •	Rotas com permissão de acesso dependendo do perfil, "user" ou "admin".
+
 
 ### Dependências:
 Spring Boot
