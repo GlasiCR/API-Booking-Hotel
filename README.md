@@ -67,7 +67,14 @@ No arquivo application.properties, configure banco de dados.
 |--------|------------------------------------|-----------------------------------------------------------|-------------------------------------------------------------------------------------|
 | POST   | 🔐 `{{URL}}/rooms/`                    | Criar quarto         | `json\n{ "nameRoom":"Quarto Standart", "price": 10990, "capacity": 2, "hotel": 1 }`       |
 | GET   | `{{URL}}/rooms/{idRoom}` | Filtra quarto pelo ID         |   
-| GET   | `{{URL}}/rooms/filterDate/{idRoom}`                    | Verifica disponibilidade do quarto de acordo com a data de check-in e check-out   | `json\n{ "checkin": "YYY-MM-DD  ", "checkout": "YYY-MM-DD" }`   | 
+| GET   | `{{URL}}/rooms/filterDate/{idRoom}`                    | Verifica disponibilidade do quarto de acordo com a data de check-in e check-out   | `json\n{ "checkin": "YYY-MM-DD", "checkout": "YYY-MM-DD" }`   | 
+
+##### Rotas de bookings
+| Método | Rota                               | Descrição                                                  | Exemplo Requisição Body                                                             |
+|--------|------------------------------------|-----------------------------------------------------------|-------------------------------------------------------------------------------------|
+| POST   | 🔒 `{{URL}}/hotels/{idHotel}/booking/{idRoom}`   | Registrar reserva         | `json\n{ "checkin": "YYY-MM-DD", "checkout": "YYY-MM-DD", "user": 1, "numberCreditCard": 1234123412341234, "quantityGuest": 3 }`       |
+| PUT   | `{{URL}}/bookings/{idBooking}` | Rota que cancela reserva. Reserva não é deletada no banco de dados, mas seu status muda.  | `json\n{ "user": 1, "todayDate": "YYY-MM-DD" }`  |
+| GET   | `{{URL}}/calendar?checkin=YYYY-MM-DD&checkout=YYYY-MM-DD`    | Filtra disponibilidade de reserva fazendo filtro por data de check-in e check-out   | `json\n{ "idHotel": 1}`   | 
 
 ### Contribuições:
 Ficarei muito feliz caso queira contribuir com o projeto e desde já agradeço =) Clone este repositório, crie seu branch de trabalho e bora lá!
