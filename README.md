@@ -84,7 +84,7 @@ No arquivo application.properties, configure banco de dados.
 | Método | Rota                               | Descrição                                                  | Exemplo Requisição Body                                                             |
 |--------|------------------------------------|-----------------------------------------------------------|-------------------------------------------------------------------------------------|
 | POST   | 🔒 `{{URL}}/hotels/{idHotel}/booking/{idRoom}`   | Registrar reserva         | `json\n{ "checkin": "YYY-MM-DD", "checkout": "YYY-MM-DD", "user": 1, "numberCreditCard": 1234123412341234, "quantityGuest": 3 }`       |
-| PUT   | `{{URL}}/bookings/{idBooking}` | Rota que cancela reserva. Reserva não é deletada no banco de dados, mas seu status muda.  | `json\n{ "user": 1, "todayDate": "YYY-MM-DD" }`  |
+| PUT   | 🔒 `{{URL}}/bookings/{idBooking}` | Rota que cancela reserva. Reserva não é deletada no banco de dados, mas seu status muda.  | `json\n{ "user": 1, "todayDate": "YYY-MM-DD" }`  |
 | GET   | `{{URL}}/calendar?checkin=YYYY-MM-DD&checkout=YYYY-MM-DD`    | Filtra disponibilidade de reserva fazendo filtro por data de check-in e check-out   | `json\n{ "idHotel": 1}`   | 
 
 ### Contribuições:
